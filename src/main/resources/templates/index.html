@@ -1,0 +1,80 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>MANCALA GAME</title>
+    <script th:inline="javascript">
+        window.onload = function() {
+            var isEnded = [[${gameResponse.ended}]];
+            if(isEnded === false)
+                document.getElementById('winner').style.display = "none";
+            else
+                document.getElementById('winner').style.display = 'block';
+
+            var exceptionMessage = [[${exceptionResponse.message}]];
+            console.log("error = " + exceptionMessage);
+            if(exceptionMessage !== ''){
+                alert(exceptionMessage);
+            }
+        };
+
+    </script>
+</head>
+<body>
+<h1 th:text="${gameResponse.currentPlayer.name}"></h1>
+<form action="sow"  method="post">
+    <table>
+        <tr>
+            <td></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[5].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[4].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[3].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[2].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[1].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[0].stoneCount}"></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td style="font-size:30px; width:270px; text-align:center" th:text="${gameResponse.board.pits[6].stoneCount}"></td>
+            <td>5</td>
+            <td>4</td>
+            <td>3</td>
+            <td>2</td>
+            <td>1</td>
+            <td>0</td>
+            <td style="font-size:30px; width:270px; text-align:center" th:text="${gameResponse.board.pits[13].stoneCount}"></td>
+        </tr>
+        <tr>
+            <td style="width:270px; text-align:center">House Of Player 1</td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[7].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[8].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[9].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[10].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[11].stoneCount}"></td>
+            <td style="font-size:30px" th:text="${gameResponse.board.pits[12].stoneCount}"></td>
+            <td style="width:270px; text-align:center">House Of Player 2</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td></td>
+        </tr>
+    </table>
+     <p>
+         <input type="number" name="pitId"  id="pitId" />
+         <input type="submit" value="Submit" />
+     </p>
+    <p>
+        <button th:onclick="|window.location.href='/restart'|" type="button">Restart Game</button>
+    </p>
+    <p>
+    <h3 id="winner" >WINNER IS <span th:text="${gameResponse.winner}"></span> CONGRATULATIONS!!</h3>
+    </p>
+</form>
+</body>
+</html>

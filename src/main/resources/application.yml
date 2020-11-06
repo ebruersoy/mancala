@@ -1,0 +1,19 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+springfox:
+  documentation:
+    swagger:
+      v2:
+        host: localhost:8080
+spring:
+  application:
+    name: mancala
+---
+
+spring:
+  profiles: test
+logging:
+  level:
+    root: error
