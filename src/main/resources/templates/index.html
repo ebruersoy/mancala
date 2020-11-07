@@ -22,7 +22,7 @@
 </head>
 <body>
 <h1 th:text="${gameResponse.currentPlayer.name}"></h1>
-<form action="sow"  method="post">
+<form th:action="@{/sow}" method="get">
     <table>
         <tr>
             <td></td>
@@ -65,10 +65,10 @@
             <td></td>
         </tr>
     </table>
-     <p>
-         <input type="number" name="pitId"  id="pitId" />
-         <input type="submit" value="Submit" />
-     </p>
+    <p>
+        <input type="number" name="pitIndex" th:name="pitIndex" id="pitIndex" />
+        <input type="submit" value="Submit" />
+    </p>
     <p>
         <button th:onclick="|window.location.href='/restart'|" type="button">Restart Game</button>
     </p>

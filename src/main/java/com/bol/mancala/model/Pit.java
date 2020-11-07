@@ -1,7 +1,5 @@
 package com.bol.mancala.model;
 
-import com.bol.mancala.util.Constants;
-
 /**
  * @author Ebru Ersoy Göksal
  */
@@ -11,32 +9,31 @@ public class Pit{
     private final Player owner;
     private int stoneCount;
 
-    public int nextPitId(){
-        return (index + 1) % Constants.totalPits;
+    public int nextPitIndex(){
+        return (index + 1) % Board.totalPits;
     }
 
     public Pit(int index, Player owner) {
         this.index = index;
         this.owner = owner;
-        stoneCount = Constants.initialStoneCountForEachPit;
+        this.stoneCount = Board.initialStoneCountForEachPit;
     }
 
-    public void addStone(int count) {
+    public void addStones(int count) {
         stoneCount += count;
     }
 
-    public int selected() {
+    public int select() {
         if(stoneCount == 1){
             stoneCount = 0;
             return 1;
         }
         int currentStoneCount = stoneCount;
         stoneCount = 1;
-        int removedStoneCount = currentStoneCount - 1;
-        return removedStoneCount;
+        return currentStoneCount - 1;
     }
 
-    public int emptyPit(){
+    public int empty(){
         int currentStoneCount = stoneCount;
         stoneCount = 0;
         return currentStoneCount;
@@ -44,20 +41,11 @@ public class Pit{
 
     public int getOpponentPitIndexForCapture() {
         int difference = getOwner().getHouseIndex() - index;
-        int indexToBeCaptured = (getOwner().getHouseIndex() + difference ) % Constants.totalPits;
-        return indexToBeCaptured;
+        return (getOwner().getHouseIndex() + difference ) % Board.totalPits;
     }
 
     public int getIndex() {
         return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public boolean isHouse() {
-        return false;
     }
 
     public Player getOwner() {
@@ -68,8 +56,11 @@ public class Pit{
         return stoneCount;
     }
 
+    public boolean isHouse() {
+        return false;
+    }
+
     public void setStoneCount(int stoneCount) {
         this.stoneCount = stoneCount;
     }
-
 }

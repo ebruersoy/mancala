@@ -25,16 +25,9 @@ public class InvalidRequestException extends MancalaException {
         return field;
     }
 
-    public void setField(String field) {
-        this.field = field;
-    }
-
     public String getExpected() {
         return expected;
     }
 
-    public void setExpected(String expected) {
-        this.expected = expected;
-    }
 }
 

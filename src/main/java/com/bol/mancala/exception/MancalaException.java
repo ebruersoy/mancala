@@ -20,15 +20,7 @@ public class MancalaException extends RuntimeException{
         return game;
     }
 
-    public void setGame(Game game) {
-        this.game = game;
-    }
-
     public ExceptionMessageResponse getExceptionMessageResponse() {
         return exceptionMessageResponse;
-    }
-
-    public void setExceptionMessageResponse(ExceptionMessageResponse exceptionMessageResponse) {
-        this.exceptionMessageResponse = exceptionMessageResponse;
     }
 }

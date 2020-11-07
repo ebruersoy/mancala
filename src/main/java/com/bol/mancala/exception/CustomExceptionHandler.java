@@ -16,7 +16,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler
 {
     @ExceptionHandler(MancalaException.class)
     public final ResponseEntity<String> handleAllExceptions(MancalaException ex, WebRequest request) {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
 

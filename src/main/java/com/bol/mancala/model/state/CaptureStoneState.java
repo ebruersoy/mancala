@@ -6,19 +6,18 @@ import com.bol.mancala.model.Pit;
 /**
  * @author Ebru Ersoy Göksal
  */
-public class CaptureStoneState implements IState{
+public class CaptureStoneState extends State{
     @Override
-    public void handle(Game context, int selectedIndex) {
+    public void execute(Game context, int selectedIndex) {
         captureStones(context);
         ContinueGameState continueGameState = new ContinueGameState();
         context.setCurrentState(continueGameState);
-        continueGameState.handle(context,selectedIndex);
     }
 
     private void captureStones(Game context) {
         Pit lastPit = context.getBoard().getLastPit();
         Pit[] pits = context.getBoard().getPits();
-        pits[lastPit.getOwner().getHouseIndex()].addStone(pits[lastPit.getOpponentPitIndexForCapture()].emptyPit() + lastPit.emptyPit());
+        pits[lastPit.getOwner().getHouseIndex()].addStones(pits[lastPit.getOpponentPitIndexForCapture()].empty() + lastPit.empty());
     }
 
 

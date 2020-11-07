@@ -7,13 +7,12 @@ import com.bol.mancala.util.PlayerType;
 /**
  * @author Ebru Ersoy Göksal
  */
-public class ContinueGameState implements IState{
+public class ContinueGameState extends State {
     @Override
-    public void handle(Game context, int selectedIndex) {
+    public void execute(Game context, int selectedIndex) {
         if (canGameEnd(context)){
             EndGameState endGameState = new EndGameState();
             context.setCurrentState(endGameState);
-            endGameState.handle(context,selectedIndex);
         } else{
             WaitState waitState = new WaitState();
             context.setCurrentState(waitState);

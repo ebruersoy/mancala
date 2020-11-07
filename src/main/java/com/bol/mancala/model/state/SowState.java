@@ -7,30 +7,29 @@ import com.bol.mancala.model.Player;
 /**
  * @author Ebru Ersoy Göksal
  */
-public class SowState implements IState {
+public class SowState extends State {
     @Override
-    public void handle(Game context, int selectedIndex) {
+    public void execute(Game context, int selectedIndex) {
         sow(context, context.getCurrentPlayer(), selectedIndex);
         WhoIsNextState whoIsNextState = new WhoIsNextState();
         context.setCurrentState(whoIsNextState);
-        whoIsNextState.handle(context, selectedIndex);
     }
 
     private void sow(Game context, Player currentPlayer, int selectedPitIndex){
         Pit selectedPit = context.getBoard().getPits()[selectedPitIndex];
-        int stoneCount = selectedPit.selected();
-        int nextPitId = selectedPit.nextPitId();
+        int stoneCount = selectedPit.select();
+        int nextPitIndex = selectedPit.nextPitIndex();
 
         while (stoneCount != 0){
-            Pit nextPit = context.getBoard().getPits()[nextPitId];
+            Pit nextPit = context.getBoard().getPits()[nextPitIndex];
             if(nextPit.isHouse() && nextPit.getOwner().getId() != currentPlayer.getId()){ //opponent's house is forbidden!
-                nextPitId = nextPit.nextPitId();
+                nextPitIndex = nextPit.nextPitIndex();
                 continue;
             }
-            nextPit.addStone(1);
+            nextPit.addStones(1);
             stoneCount--;
             context.getBoard().setLastPit(nextPit);
-            nextPitId = nextPit.nextPitId();
+            nextPitIndex = nextPit.nextPitIndex();
         }
     }
 }

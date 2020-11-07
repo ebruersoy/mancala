@@ -11,15 +11,15 @@ import org.springframework.stereotype.Component;
 public class GameService {
     private Game game;
 
-    public GameService() {
-        this.game = new Game();
+    public GameService(Game game) {
+        this.game = game;
     }
 
-    public void play(Integer pitId) {
-        if(pitId == null){
-            throw new InvalidRequestException(getGame(), "Pit Id", pitId, "non empty");
+    public void play(Integer pitIndex) {
+        if(pitIndex == null){
+            throw new InvalidRequestException(getGame(), "Pit Index", pitIndex, "not empty");
         }
-        game.play(pitId);
+        game.play(pitIndex);
     }
 
     public Game getGame() {

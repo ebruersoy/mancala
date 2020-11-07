@@ -4,16 +4,16 @@ import com.bol.mancala.exception.PreconditionFailedException;
 import com.bol.mancala.model.state.EndGameState;
 import com.bol.mancala.model.state.IState;
 import com.bol.mancala.model.state.WaitState;
-import com.bol.mancala.util.Constants;
 import com.bol.mancala.util.PlayerType;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Ebru Ersoy Göksal
  */
-
+@Component
 public class Game {
     private IState currentState;
-    private final Board board;
+    private Board board;
     private Player currentPlayer;
     private PlayerType nextPlayerType;
     private Player player1;
@@ -30,8 +30,8 @@ public class Game {
     }
 
     private void createPlayers() {
-        player1 = new Player(Constants.startIndexOfPlayer1, "Player 1");
-        player2 = new Player(Constants.startIndexOfPlayer2, "Player 2");
+        player1 = new Player(Board.startIndexOfPlayer1, "Player 1");
+        player2 = new Player(Board.startIndexOfPlayer2, "Player 2");
     }
 
     public void play(int selectedPitIndex){

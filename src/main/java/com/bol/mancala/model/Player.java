@@ -1,7 +1,5 @@
 package com.bol.mancala.model;
 
-import com.bol.mancala.util.Constants;
-
 /**
  * @author Ebru Ersoy Göksal
  */
@@ -12,12 +10,13 @@ public class Player {
     private final int houseIndex;
     private final int startIndex;
     private final int endIndex;
+    public static int pitCountForEachPlayer = 6;
 
     public Player(int startIndex, String name) {
         this.id = startIndex;
         this.name = name;
         this.startIndex = startIndex;
-        this.endIndex = startIndex + Constants.pitCountForEachPlayer - 1;
+        this.endIndex = startIndex + pitCountForEachPlayer - 1;
         this.houseIndex = endIndex + 1;
     }
 
