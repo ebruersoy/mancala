@@ -57,11 +57,11 @@ class SowStateUnitTest {
         int selectedPitIndex = Board.startIndexOfPlayer1;
         game.getBoard().getPits()[selectedPitIndex].setStoneCount(Board.totalPits);
         sowState.execute(game, selectedPitIndex);
-        assertEquals(game.getBoard().getPits()[selectedPitIndex].getStoneCount(), 2);
+        assertEquals(game.getBoard().getPits()[selectedPitIndex].getStoneCount(), 1);
     }
 
     @Test
-    void pits_with_one_stone_should_should_passed_next_pit(){
+    void pits_with_one_stone_should_be_passed_next_pit(){
         game.setCurrentPlayer(game.getPlayer1());
         int selectedPitIndex = Board.startIndexOfPlayer1;
         game.getBoard().getPits()[selectedPitIndex].setStoneCount(1);
@@ -76,13 +76,13 @@ class SowStateUnitTest {
     void should_sow_in_correct_count(){
         game.setCurrentPlayer(game.getPlayer1());
         int selectedPitIndex = Board.startIndexOfPlayer1;
-        game.getBoard().getPits()[selectedPitIndex].setStoneCount(2);
+        game.getBoard().getPits()[selectedPitIndex].setStoneCount(1);
         int nextPitIndex = game.getBoard().getPits()[selectedPitIndex].nextPitIndex();
         game.getBoard().getPits()[nextPitIndex].setStoneCount(5);
         int nextPitIndexOfNextPit = game.getBoard().getPits()[nextPitIndex].nextPitIndex();
         game.getBoard().getPits()[nextPitIndexOfNextPit].setStoneCount(3);
         sowState.execute(game, selectedPitIndex);
-        assertEquals(game.getBoard().getPits()[selectedPitIndex].getStoneCount(), 1);
+        assertEquals(game.getBoard().getPits()[selectedPitIndex].getStoneCount(), 0);
         assertEquals(game.getBoard().getPits()[nextPitIndex].getStoneCount(), 6);
         assertEquals(game.getBoard().getPits()[nextPitIndexOfNextPit].getStoneCount(), 3);
     }

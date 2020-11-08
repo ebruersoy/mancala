@@ -19,9 +19,10 @@ class GameUnitTest {
 
     @Test
     void play() {
-        game.play(0);
-        assertEquals(game.getBoard().getLastPit().getIndex(), 5);
-        assertEquals(game.getBoard().getPits()[0].getStoneCount(), 1);
+        int selectedPitIndex = 1;
+        game.play(selectedPitIndex);
+        assertEquals(game.getBoard().getLastPit().getIndex(), 7);
+        assertEquals(game.getBoard().getPits()[selectedPitIndex].getStoneCount(), 0);
         assertEquals(game.getCurrentPlayer().getId(), game.getPlayer2().getId());
     }
 

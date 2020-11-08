@@ -24,13 +24,9 @@ public class Pit{
     }
 
     public int select() {
-        if(stoneCount == 1){
-            stoneCount = 0;
-            return 1;
-        }
         int currentStoneCount = stoneCount;
-        stoneCount = 1;
-        return currentStoneCount - 1;
+        stoneCount = 0;
+        return currentStoneCount;
     }
 
     public int empty(){
