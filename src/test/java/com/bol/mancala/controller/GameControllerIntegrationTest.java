@@ -86,6 +86,19 @@ public class GameControllerIntegrationTest {
     }
 
     @Test
+    public void should_throws_exception_when_select_index_out_of_range() throws Exception {
+        MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/sow")
+                .param("pitIndex", String.valueOf(Board.totalPits * 3))).andReturn();
+
+        String resultDOW = result.getResponse().getContentAsString();
+        assertNotNull(resultDOW);
+        assertTrue(result.getResolvedException() instanceof InvalidRequestException);
+        InvalidRequestException invalidRequestException = (InvalidRequestException) result.getResolvedException();
+        assertEquals(invalidRequestException.getField(),"Pit Index");
+        assertTrue(invalidRequestException.getExpected().contains("in range"));
+    }
+
+    @Test
     public void should_play() throws Exception {
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/"))
                 .andReturn();
