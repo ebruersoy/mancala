@@ -6,7 +6,6 @@ import com.bol.mancala.model.Board;
 import com.bol.mancala.model.Game;
 import com.bol.mancala.model.Pit;
 import com.bol.mancala.model.Player;
-import com.bol.mancala.model.state.EndGameState;
 import com.bol.mancala.model.state.WaitState;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -40,9 +39,9 @@ class GameServiceUnitTest {
         assertTrue(invalidRequestException.getExceptionMessageResponse().getMessage().contains("Invalid value for field Pit Index"));
     }
     @Test
-    void play_should_throws_exception_in_endgame_state() {
+    void play_should_throws_exception_when_game_ended() {
         PreconditionFailedException preconditionFailedException = assertThrows(PreconditionFailedException.class, () -> {
-            gameService.getGame().setCurrentState(new EndGameState());
+            gameService.getGame().setEnded(true);
             gameService.play(1);
         });
         assertEquals(preconditionFailedException.getExceptionMessageResponse().getMessage(), "Game is over. Please restart to play again.");
@@ -111,5 +110,27 @@ class GameServiceUnitTest {
         gameService.play(1);
         gameService.restartGame();
         assertTrue(gameService.getGame().getCurrentState() instanceof WaitState);
+    }
+
+    @Test
+    public void should_end(){
+        Pit[] pits = gameService.getGame().getBoard().getPits();
+        pits[0].setStoneCount(0);
+        pits[1].setStoneCount(0);
+        pits[2].setStoneCount(0);
+        pits[3].setStoneCount(0);
+        pits[4].setStoneCount(1);
+        pits[5].setStoneCount(0);
+        pits[6].setStoneCount(29);
+        pits[7].setStoneCount(0);
+        pits[8].setStoneCount(4);
+        pits[9].setStoneCount(2);
+        pits[10].setStoneCount(2);
+        pits[11].setStoneCount(2);
+        pits[12].setStoneCount(2);
+        pits[13].setStoneCount(30);
+        gameService.getGame().setCurrentPlayer(gameService.getGame().getPlayer1());
+        gameService.play(4);
+        assertTrue(gameService.getGame().isEnded());
     }
 }

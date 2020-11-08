@@ -1,7 +1,6 @@
 package com.bol.mancala.model;
 
 import com.bol.mancala.exception.PreconditionFailedException;
-import com.bol.mancala.model.state.EndGameState;
 import com.bol.mancala.model.state.IState;
 import com.bol.mancala.model.state.WaitState;
 import com.bol.mancala.util.PlayerType;
@@ -35,7 +34,7 @@ public class Game {
     }
 
     public void play(int selectedPitIndex){
-        if(currentState instanceof EndGameState){
+        if(isEnded()){
             throw new PreconditionFailedException("Game is over. Please restart to play again." , this);
         }
         currentState.handle(this,selectedPitIndex);

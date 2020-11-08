@@ -10,8 +10,7 @@ public abstract class State implements IState {
     @Override
     public void handle(Game context, int selectedPitIndex) {
         execute(context,selectedPitIndex);
-        if(!(context.getCurrentState() instanceof WaitState)
-                && !(context.getCurrentState() instanceof EndGameState)) {
+        if(!(context.getCurrentState() instanceof WaitState)) {
             doNext(context, selectedPitIndex);
         }
     }

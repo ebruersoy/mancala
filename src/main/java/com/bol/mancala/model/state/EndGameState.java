@@ -13,6 +13,7 @@ public class EndGameState extends State {
         collectAllStonesToHouse(context, Board.houseIndexOfPlayer1);
         collectAllStonesToHouse(context, Board.houseIndexOfPlayer2);
         calculateWinner(context);
+        context.setCurrentState(new WaitState());
         context.setEnded(true);
     }
 

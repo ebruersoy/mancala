@@ -18,11 +18,11 @@ public class WaitState extends State {
         if(context.getBoard().getPits()[pitIndex].isHouse()){
             throw new PreconditionFailedException("House Pits can not be selected!", context);
         }
-        if(context.getBoard().getPits()[pitIndex].getStoneCount() == 0){
-            throw new PreconditionFailedException("Empty Pits can not be selected!", context);
-        }
         if(context.getBoard().getPits()[pitIndex].getOwner().getId() != context.getCurrentPlayer().getId()){
             throw new PreconditionFailedException("Players can not select opponent's pits!", context);
+        }
+        if(context.getBoard().getPits()[pitIndex].getStoneCount() == 0){
+            throw new PreconditionFailedException("Empty Pits can not be selected!", context);
         }
         return true;
     }
