@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  mancala-service:
+    image: ebruersoy/mancala
+    ports:
+      - 8080:8080
